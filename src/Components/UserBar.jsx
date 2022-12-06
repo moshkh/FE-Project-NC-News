@@ -7,8 +7,8 @@ const UserBar = () => {
   const { currUser } = useContext(UserContext);
 
   return (
-    <nav>
-      <Link className="userbar" to={`/${currUser}`}>
+    <nav className="userbar">
+      <Link to={`/${currUser}`}>
         Logged in as {currUser}
       </Link>
     </nav>

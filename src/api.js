@@ -18,4 +18,10 @@ export const getArticleById = (article_id) => {
     });
 };
 
-export const getArticleComments = (article_id) => {};
+export const getArticleComments = (article_id) => {
+  return ncNewsApi
+    .get(`/articles/${article_id}/comments`)
+    .then(({ data: {comments} }) => {
+      return comments
+    });
+};
