@@ -17,3 +17,5 @@ export const getArticleById = (article_id) => {
       return article;
     });
 };
+
+export const getArticleComments = (article_id) => {};
