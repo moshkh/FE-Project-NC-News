@@ -1,0 +1,27 @@
+.articles {
+}
+
+.articles-header {
+}
+
+.articles-list {
+  /* list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left; */
+}
+
+.articles-list-item {
+  /* border: 2px solid blue; */
+}
+
+.articles-list-item h3 {
+  /* color: red; */
+  margin: 10px;
+}
+
+@media only screen and (max-width: 430px) {
+  .articles-list {
+    display: grid;
+  }
+}
