@@ -9,6 +9,7 @@ import Articles from "./Components/Articles";
 import CurrentUser from "./Components/CurrentUser";
 import Topics from "./Components/Topics";
 import UserBar from "./Components/UserBar";
+import SingleArticle from "./Components/SingleArticle";
 
 function App() {
   const [currUser, setCurrUser] = useState("tickle122");
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Intro />} />
           <Route path="/:user" element={<CurrentUser />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:article_id" element={<SingleArticle />} />
           <Route path="/topics" element={<Topics />} />
         </Routes>
       </div>
