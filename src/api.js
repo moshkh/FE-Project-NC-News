@@ -21,7 +21,21 @@ export const getArticleById = (article_id) => {
 export const getArticleComments = (article_id) => {
   return ncNewsApi
     .get(`/articles/${article_id}/comments`)
-    .then(({ data: {comments} }) => {
-      return comments
+    .then(({ data: { comments } }) => {
+      return comments;
     });
+};
+
+export const patchArticleVote = (article_id, voteQty) => {
+  return ncNewsApi
+    .patch(`/articles/${article_id}`, { inc_votes: voteQty })
+    .then(
+      ({
+        data: {
+          article: { votes },
+        },
+      }) => {
+        return votes;
+      }
+    );
 };

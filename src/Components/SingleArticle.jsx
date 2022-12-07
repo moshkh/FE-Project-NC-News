@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleById, getArticleComments } from "../api";
 import Comments from "./Comments";
-import "../CSS/SingleArticle.css"
+import "../CSS/SingleArticle.css";
+import VoteCounter from "./VoteCounter";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -39,6 +40,7 @@ const SingleArticle = () => {
         <p>{article.body}</p>
         <h4>{article.created_at}</h4>
       </article>
+      <VoteCounter article_id={article_id} />
       <Comments comments={comments} />
     </main>
   );
