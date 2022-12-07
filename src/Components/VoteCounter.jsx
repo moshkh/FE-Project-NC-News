@@ -6,12 +6,20 @@ const VoteCounter = ({ article_id }) => {
   const [voteCount, setVoteCount] = useState("");
   const [incVote, setIncVote] = useState(0);
   const [err, setErr] = useState(null);
+  const [voteUpDisabled, setVoteUpDisabled] = useState(null);
+  const [voteDownDisabled, setVoteDownDisabled] = useState(null);
 
   useEffect(() => {
     getArticleById(article_id).then(({ votes }) => {
       setVoteCount(votes);
     });
-  }, []);
+  }, [article_id]);
+
+  useEffect(() => {
+    if (voteCount === 0) {
+      setVoteDownDisabled(true);
+    }
+  }, [voteCount]);
 
   useEffect(() => {
     patchArticleVote(article_id, incVote)
@@ -26,7 +34,7 @@ const VoteCounter = ({ article_id }) => {
             currVotes -= 1;
           }
         });
-        setErr("Vote did not register, please refreh and try again");
+        setErr("Votes did not update, please refreh and try again");
       });
   }, [incVote]);
 
@@ -34,20 +42,27 @@ const VoteCounter = ({ article_id }) => {
     if (event.target.innerText === "Vote Down 👎") {
       setIncVote(-1);
       setVoteCount((currVotes) => (currVotes -= 1));
+      setVoteDownDisabled(true);
+      setVoteUpDisabled(false);
     } else {
       setIncVote(1);
-      setVoteCount((votes) => (votes += 1));
+      setVoteCount((currVotes) => (currVotes += 1));
+      setVoteDownDisabled(false);
+      setVoteUpDisabled(true);
     }
   };
 
-  console.log(incVote);
-
-  if (err) return <p className="vote-counter--err">{err}</p>;
-  return (
+  return err ? (
+    <p className="vote-counter--err">{err}</p>
+  ) : (
     <section className="vote-counter">
       <p>Article Votes: {voteCount}</p>
-      <button onClick={handleVoteClick}>Vote Down 👎</button>
-      <button onClick={handleVoteClick}>Vote Up 👍</button>
+      <button onClick={handleVoteClick} disabled={voteDownDisabled}>
+        Vote Down 👎
+      </button>
+      <button onClick={handleVoteClick} disabled={voteUpDisabled}>
+        Vote Up 👍
+      </button>
     </section>
   );
 };
