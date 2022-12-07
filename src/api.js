@@ -40,4 +40,7 @@ export const patchArticleVote = (article_id, voteQty) => {
     );
 };
 
-export const postCommentToArticle = (article_id, username, commentToPost) => {};
+export const postCommentToArticle = (article_id, username, body) => {
+  return ncNewsApi
+    .post(`/articles/${article_id}/comments`, { username, body })
+};

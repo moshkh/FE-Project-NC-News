@@ -7,13 +7,17 @@ import VoteCounter from "./VoteCounter";
 import { formatDate } from "../utils/formatDate";
 import { AddComment } from "./AddComments";
 
-const SingleArticle = () => {
+const SingleArticle = ({ currUser }) => {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
 
   getArticleComments(article_id);
+
+  // useEffect(() => {
+  //   setComments(initialComments);
+  // }, [initialComments]);
 
   useEffect(() => {
     const articleFetch = getArticleById(article_id).then((res) => {
@@ -43,7 +47,11 @@ const SingleArticle = () => {
         <h4>Date Posted: {formatDate(article.created_at)}</h4>
       </article>
       <VoteCounter articleId={article_id} />
-      <AddComment articleId={article_id} />
+      <AddComment
+        currUser={currUser}
+        setComments={setComments}
+        articleId={article_id}
+      />
       <Comments comments={comments} />
     </main>
   );

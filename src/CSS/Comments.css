@@ -1,0 +1,9 @@
+.comments {
+  margin: 30px;
+  list-style: none;
+}
+
+.comments--single-comment {
+  margin: 10px;
+  padding: 10px;
+}
