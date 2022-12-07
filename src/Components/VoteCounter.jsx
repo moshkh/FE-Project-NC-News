@@ -57,10 +57,18 @@ const VoteCounter = ({ article_id }) => {
   ) : (
     <section className="vote-counter">
       <p>Article Votes: {voteCount}</p>
-      <button onClick={handleVoteClick} disabled={voteDownDisabled}>
+      <button
+        className="vote-counter--button--vote-down"
+        onClick={handleVoteClick}
+        disabled={voteDownDisabled}
+      >
         Vote Down 👎
       </button>
-      <button onClick={handleVoteClick} disabled={voteUpDisabled}>
+      <button
+        className="vote-counter--button--vote-down"
+        onClick={handleVoteClick}
+        disabled={voteUpDisabled}
+      >
         Vote Up 👍
       </button>
     </section>
