@@ -2,7 +2,6 @@ const Comments = ({ comments }) => {
   return (
     <ul className="comments">
       {comments.map((comment) => {
-        console.log(comment);
         return (
           <li className="comments--single-comment" key={comment.comment_id}>
             <h4>Comment by {`${comment.author}`}</h4>
