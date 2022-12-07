@@ -39,3 +39,5 @@ export const patchArticleVote = (article_id, voteQty) => {
       }
     );
 };
+
+export const postCommentToArticle = (article_id, username, commentToPost) => {};

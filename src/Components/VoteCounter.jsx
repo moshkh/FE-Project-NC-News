@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getArticleById, patchArticleVote } from "../api";
 import "../CSS/VoteCounter.css";
 
-const VoteCounter = ({ article_id }) => {
+const VoteCounter = ({ articleId }) => {
   const [voteCount, setVoteCount] = useState("");
   const [incVote, setIncVote] = useState(0);
   const [err, setErr] = useState(null);
@@ -10,10 +10,10 @@ const VoteCounter = ({ article_id }) => {
   const [voteDownDisabled, setVoteDownDisabled] = useState(null);
 
   useEffect(() => {
-    getArticleById(article_id).then(({ votes }) => {
+    getArticleById(articleId).then(({ votes }) => {
       setVoteCount(votes);
     });
-  }, [article_id]);
+  }, [articleId]);
 
   useEffect(() => {
     if (voteCount === 0) {
@@ -22,7 +22,7 @@ const VoteCounter = ({ article_id }) => {
   }, [voteCount]);
 
   useEffect(() => {
-    patchArticleVote(article_id, incVote)
+    patchArticleVote(articleId, incVote)
       .then(() => {
         setIncVote(0);
       })
@@ -34,7 +34,7 @@ const VoteCounter = ({ article_id }) => {
             currVotes -= 1;
           }
         });
-        setErr("Votes did not update, please refreh and try again");
+        setErr("Votes did not update, please refresh and try again");
       });
   }, [incVote]);
 

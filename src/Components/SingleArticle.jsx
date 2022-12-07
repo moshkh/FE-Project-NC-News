@@ -4,6 +4,8 @@ import { getArticleById, getArticleComments } from "../api";
 import Comments from "./Comments";
 import "../CSS/SingleArticle.css";
 import VoteCounter from "./VoteCounter";
+import { formatDate } from "../utils/formatDate";
+import { AddComment } from "./AddComments";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -38,9 +40,10 @@ const SingleArticle = () => {
         <h3>Topic: {article.topic}</h3>
         <h3>Author: {article.author}</h3>
         <p>{article.body}</p>
-        <h4>{article.created_at}</h4>
+        <h4>Date Posted: {formatDate(article.created_at)}</h4>
       </article>
-      <VoteCounter article_id={article_id} />
+      <VoteCounter articleId={article_id} />
+      <AddComment articleId={article_id} />
       <Comments comments={comments} />
     </main>
   );
