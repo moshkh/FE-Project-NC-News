@@ -49,6 +49,7 @@ const SingleArticle = ({ currUser }) => {
       <VoteCounter articleId={article_id} />
       <AddComment
         currUser={currUser}
+        comments={comments}
         setComments={setComments}
         articleId={article_id}
       />

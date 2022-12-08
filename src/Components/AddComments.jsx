@@ -2,10 +2,11 @@ import { useState } from "react";
 import { postCommentToArticle } from "../api";
 import "../CSS/AddComments.css";
 
-export const AddComment = ({ currUser, setComments, articleId }) => {
+export const AddComment = ({ articleId, comments, currUser, setComments }) => {
   const [newComment, setNewComment] = useState("");
   const [buttonText, setButtonText] = useState("Post Comment");
   const [err, setErr] = useState({ msg: "" });
+  const [commentId, setCommentId] = useState(0);
 
   const handleCommentInput = (event) => {
     setNewComment(event.target.value);
@@ -17,20 +18,33 @@ export const AddComment = ({ currUser, setComments, articleId }) => {
       return setErr({ msg: "Invalid comment" });
     }
     const date = new Date();
-    let commentId = 0;
     const commentSubmitted = {
-      comment_id: commentId--,
+      comment_id: "",
       author: currUser,
       body: newComment,
       created_at: date.toString(),
       votes: 0,
     };
+    setCommentId((currCommentId) => {
+      commentSubmitted.comment_id = currCommentId - 1;
+      return currCommentId - 1;
+    });
+
     setComments((currComments) => {
       return [commentSubmitted, ...currComments];
     });
-    
+
+    //removed newComment as a parameter to the below function to help deal with err
+    //currently trying to reverse the optimistic render
+    //having difficulty finding a way to capture the rendering comment
+    //can I do it via a useEffect?
     postCommentToArticle(articleId, currUser).catch((err) => {
-      console.log(commentId)
+      const commentToRemove = comments.find((comment) => {
+        if (comment.comment_id === commentId - 1) {
+          return comment;
+        }
+      });
+      console.log(commentToRemove);
       setButtonText("Post Comment");
       setErr({ msg: "Oops something went wrong - try posting again!" });
     });

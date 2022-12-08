@@ -2,7 +2,6 @@ import { formatDate } from "../utils/formatDate";
 import "../CSS/Comments.css";
 
 const Comments = ({ comments }) => {
-  console.log(comments);
   return (
     <ul className="comments">
       {comments.map((comment) => {
