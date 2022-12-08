@@ -41,9 +41,14 @@ export const patchArticleVote = (article_id, voteQty) => {
 };
 
 export const postCommentToArticle = (article_id, user, comment) => {
-  return ncNewsApi
-    .post(`/articles/${article_id}/comments`, {
-      username: user,
-      body: comment,
-    })
+  return ncNewsApi.post(`/articles/${article_id}/comments`, {
+    username: user,
+    body: comment,
+  });
+};
+
+export const getTopics = () => {
+  return ncNewsApi.get("/topics").then(({ data: { topics } }) => {
+    return topics;
+  });
 };

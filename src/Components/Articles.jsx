@@ -1,20 +1,38 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import "../CSS/Articles.css";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
+import SortBy from "./SortBy";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [articleIdClicked, setArticleIdClicked] = useState();
+  const [sortBy, setSortBy] = useState("created_at");
+  const { topicname } = useParams();
+
+  //URL is being updated when the sortBy value changes
+  //sortBy value is set
+  //need to now figure out how to get the query from API call
 
   useEffect(() => {
-    getArticles().then((res) => {
-      setArticles(res);
-      setLoading(false);
-    });
-  }, []);
+    getArticles()
+      .then((articlesReceived) => {
+        if (topicname) {
+          const filteredArticles = articlesReceived.filter((article) => {
+            return article.topic === topicname;
+          });
+          setArticles(filteredArticles);
+        } else {
+          setArticles(articlesReceived);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [topicname]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -22,12 +40,15 @@ const Articles = () => {
 
   return (
     <main className="articles">
-      <h2 className="articles-header">All Articles</h2>
+      <h2 className="articles-header">
+        {topicname ? `Articles on ${topicname}` : "All Articles"}
+      </h2>
+      <SortBy setSortBy={setSortBy} />
       <ul className="articles-list">
         {articles.map((article) => {
           return (
             <li className="articles-list-item" key={article.article_id}>
-              <Link to={`/articles/${article.article_id}`}>
+              <Link to={`/articles/viewarticle/${article.article_id}`}>
                 <h3>{article.title}</h3>
               </Link>
               <p>Topic: {article.topic}</p>
