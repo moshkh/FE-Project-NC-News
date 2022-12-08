@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getTopics } from "../api";
+import "../CSS/Topics.css";
 
 const Topics = () => {
   const [topics, setTopics] = useState([]);
-  const [loading, isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    getTopics().then((res) => {
+      setTopics(res);
+      setIsLoading(false);
+    });
+  }, []);
 
-  // api call for topics
-  // export const getTopics = () => {
-  //   return ncNewsApi.get("/topics").then((data) => {
-  //     console.log(data);
-  //   });
-  // };
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <main>
+    <main className="topics">
       <h2>Topics</h2>
-      <p>Topics from API go here</p>
+      <ul className="topics--list">
+        {topics.map((topic) => {
+          return (
+            <li className="topics--list-item" key={topic.slug}>
+              <Link to={`/articles?topic=${topic.slug}`}>
+                <h3>{topic.slug}</h3>
+              </Link>
+              <p>{topic.description}</p>
+            </li>
+          );
+        })}
+      </ul>
     </main>
   );
 };

@@ -1,20 +1,33 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import "../CSS/Articles.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [articleIdClicked, setArticleIdClicked] = useState();
+  const [searchParams] = useSearchParams();
+  const topic = searchParams.get("topic")
 
   useEffect(() => {
-    getArticles().then((res) => {
-      setArticles(res);
-      setLoading(false);
-    });
-  }, []);
+    getArticles()
+      .then((articlesReceived) => {
+        if (topic) {
+          const filteredArticles = articlesReceived.filter((article) => {
+            return article.topic === topic;
+          });
+          setArticles(filteredArticles);
+        } else {
+          setArticles(articlesReceived);
+        }
+
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [topic]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -22,12 +35,12 @@ const Articles = () => {
 
   return (
     <main className="articles">
-      <h2 className="articles-header">All Articles</h2>
+      <h2 className="articles-header">{topic ? `Articles on ${topic}`: "All Articles"}</h2>
       <ul className="articles-list">
         {articles.map((article) => {
           return (
             <li className="articles-list-item" key={article.article_id}>
-              <Link to={`/articles/${article.article_id}`}>
+              <Link to={`/articles/viewarticle/${article.article_id}`}>
                 <h3>{article.title}</h3>
               </Link>
               <p>Topic: {article.topic}</p>
