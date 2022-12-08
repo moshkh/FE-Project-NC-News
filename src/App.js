@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Intro />} />
           <Route path="/:user" element={<CurrentUser />} />
           <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:article_id" element={<SingleArticle />} />
+          <Route path="/articles/:article_id" element={<SingleArticle currUser={currUser}/>} />
           <Route path="/topics" element={<Topics />} />
         </Routes>
       </div>

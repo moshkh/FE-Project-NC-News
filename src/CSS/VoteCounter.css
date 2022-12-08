@@ -8,3 +8,8 @@
   padding: 10px;
   color: red;
 }
+
+.vote-counter button {
+  margin: 5px;
+  padding: 5px;
+}
