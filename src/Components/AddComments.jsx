@@ -19,14 +19,13 @@ export const AddComment = ({ articleId, comments, currUser, setComments }) => {
     }
     const date = new Date();
     const commentSubmitted = {
-      comment_id: "",
+      comment_id: commentId,
       author: currUser,
       body: newComment,
-      created_at: date.toString(),
+      created_at: date.toISOString(),
       votes: 0,
     };
     setCommentId((currCommentId) => {
-      commentSubmitted.comment_id = currCommentId - 1;
       return currCommentId - 1;
     });
 
@@ -34,17 +33,11 @@ export const AddComment = ({ articleId, comments, currUser, setComments }) => {
       return [commentSubmitted, ...currComments];
     });
 
-    //removed newComment as a parameter to the below function to help deal with err
-    //currently trying to reverse the optimistic render
-    //having difficulty finding a way to capture the rendering comment
-    //can I do it via a useEffect?
-    postCommentToArticle(articleId, currUser).catch((err) => {
-      const commentToRemove = comments.find((comment) => {
-        if (comment.comment_id === commentId - 1) {
-          return comment;
-        }
+    postCommentToArticle(articleId, currUser, newComment).catch((err) => {
+      setComments((currComments) => {
+        currComments.shift();
+        return [...currComments];
       });
-      console.log(commentToRemove);
       setButtonText("Post Comment");
       setErr({ msg: "Oops something went wrong - try posting again!" });
     });

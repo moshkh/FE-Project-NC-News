@@ -1,6 +1,9 @@
 .add-comment {
-  margin: 30px;
+  margin: auto;
   padding: 10px;
+  text-align: center;
+  /* width: 200px;
+  height: 300px; */
 }
 
 .add-comment label {
@@ -9,10 +12,13 @@
 
 .add-comment textarea {
   margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 10px;
+  display: block;
   resize: none;
   height: 150px;
-  width: 400px;
+  width: 500px;
 }
 
 .add-comment button {
@@ -27,3 +33,9 @@
   color: red;
 }
 
+@media screen and (max-width: 425px) { 
+  .add-comment textarea {
+    height: 150px;
+    width: 200px;
+  }
+}
