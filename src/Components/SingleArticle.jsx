@@ -12,12 +12,7 @@ const SingleArticle = ({ currUser }) => {
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-
-  getArticleComments(article_id);
-
-  // useEffect(() => {
-  //   setComments(initialComments);
-  // }, [initialComments]);
+  const [commentAdded, setCommentAdded] = useState(false);
 
   useEffect(() => {
     const articleFetch = getArticleById(article_id).then((res) => {
@@ -26,12 +21,13 @@ const SingleArticle = ({ currUser }) => {
 
     const commentsFetch = getArticleComments(article_id).then((res) => {
       setComments(res);
+      setCommentAdded(false);
     });
 
     Promise.all([articleFetch, commentsFetch]).then(() => {
       setLoading(false);
     });
-  }, [article_id]);
+  }, [article_id, commentAdded]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -48,10 +44,9 @@ const SingleArticle = ({ currUser }) => {
       </article>
       <VoteCounter articleId={article_id} />
       <AddComment
-        currUser={currUser}
-        comments={comments}
-        setComments={setComments}
         articleId={article_id}
+        currUser={currUser}
+        setCommentAdded={setCommentAdded}
       />
       <Comments comments={comments} />
     </main>

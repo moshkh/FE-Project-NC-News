@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ncNewsApi = axios.create({
-  baseURL: "https://nc-news.cyclic.app/api",
+  baseURL: "https://nc-news-fqa4.onrender.com/api",
 });
 
 export const getArticles = () => {
@@ -40,7 +40,10 @@ export const patchArticleVote = (article_id, voteQty) => {
     );
 };
 
-export const postCommentToArticle = (article_id, username, body) => {
+export const postCommentToArticle = (article_id, user, comment) => {
   return ncNewsApi
-    .post(`/articles/${article_id}/comments`, { username, body })
+    .post(`/articles/${article_id}/comments`, {
+      username: user,
+      body: comment,
+    })
 };
