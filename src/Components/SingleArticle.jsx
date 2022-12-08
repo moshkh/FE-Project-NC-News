@@ -4,14 +4,15 @@ import { getArticleById, getArticleComments } from "../api";
 import Comments from "./Comments";
 import "../CSS/SingleArticle.css";
 import VoteCounter from "./VoteCounter";
+import { formatDate } from "../utils/formatDate";
+import { AddComment } from "./AddComments";
 
-const SingleArticle = () => {
+const SingleArticle = ({ currUser }) => {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
-
-  getArticleComments(article_id);
+  const [commentAdded, setCommentAdded] = useState(false);
 
   useEffect(() => {
     const articleFetch = getArticleById(article_id).then((res) => {
@@ -20,12 +21,13 @@ const SingleArticle = () => {
 
     const commentsFetch = getArticleComments(article_id).then((res) => {
       setComments(res);
+      setCommentAdded(false);
     });
 
     Promise.all([articleFetch, commentsFetch]).then(() => {
       setLoading(false);
     });
-  }, [article_id]);
+  }, [article_id, commentAdded]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -38,9 +40,14 @@ const SingleArticle = () => {
         <h3>Topic: {article.topic}</h3>
         <h3>Author: {article.author}</h3>
         <p>{article.body}</p>
-        <h4>{article.created_at}</h4>
+        <h4>Date Posted: {formatDate(article.created_at)}</h4>
       </article>
-      <VoteCounter article_id={article_id} />
+      <VoteCounter articleId={article_id} />
+      <AddComment
+        articleId={article_id}
+        currUser={currUser}
+        setCommentAdded={setCommentAdded}
+      />
       <Comments comments={comments} />
     </main>
   );

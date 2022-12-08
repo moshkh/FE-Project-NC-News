@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import "../CSS/Articles.css";
 import { Link } from "react-router-dom";
+import { formatDate } from "../utils/formatDate";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
@@ -31,7 +32,7 @@ const Articles = () => {
               </Link>
               <p>Topic: {article.topic}</p>
               <p>Author: {article.author}</p>
-              <p>Date Posted: {article.created_at}</p>
+              <p>Date Posted: {formatDate(article.created_at)}</p>
               <p>Comments: {article.comment_count}</p>
               <p>Votes: {article.votes}</p>
             </li>
