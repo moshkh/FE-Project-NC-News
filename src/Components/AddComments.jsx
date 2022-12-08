@@ -23,14 +23,14 @@ export const AddComment = ({ articleId, currUser, setCommentAdded }) => {
         setCommentAdded(true);
         setDisableButton(false);
         setButtonText("Comment Posted! Post Again?");
+        setNewComment("");
+        setErr({ msg: "" });
       })
       .catch((err) => {
         setDisableButton(false);
         setButtonText("Post Comment");
         setErr({ msg: "Oops something went wrong - try posting again!" });
       });
-    setNewComment("");
-    setErr({ msg: "" });
   };
 
   return (
