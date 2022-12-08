@@ -26,6 +26,7 @@ function App() {
           <Route path="/topics" element={<Topics />} />
           <Route path="/:user" element={<CurrentUser />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/topic/:topicname" element={<Articles />} />
           <Route
             path={`/articles/viewarticle/:article_id`}
             element={<SingleArticle currUser={currUser} />}

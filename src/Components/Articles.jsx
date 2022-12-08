@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import "../CSS/Articles.css";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchParams] = useSearchParams();
-  const topic = searchParams.get("topic")
+  const { topicname } = useParams();
 
   useEffect(() => {
     getArticles()
       .then((articlesReceived) => {
-        if (topic) {
+        if (topicname) {
           const filteredArticles = articlesReceived.filter((article) => {
-            return article.topic === topic;
+            return article.topic === topicname;
           });
           setArticles(filteredArticles);
         } else {
@@ -27,7 +26,7 @@ const Articles = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [topic]);
+  }, [topicname]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -35,7 +34,9 @@ const Articles = () => {
 
   return (
     <main className="articles">
-      <h2 className="articles-header">{topic ? `Articles on ${topic}`: "All Articles"}</h2>
+      <h2 className="articles-header">
+        {topicname ? `Articles on ${topicname}` : "All Articles"}
+      </h2>
       <ul className="articles-list">
         {articles.map((article) => {
           return (
