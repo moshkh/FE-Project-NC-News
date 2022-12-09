@@ -9,28 +9,12 @@ import OrderBy from "./OrderBy";
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [sortBy, setSortBy] = useState("created_at");
   const { topicname } = useParams();
-  const [searchParams] = useSearchParams();
-
-  const sortBySearch = searchParams.get("sort_by");
-
-  //URL is being updated when the sortBy value changes
-  //sortBy value is set
-  //need to now figure out how to get the query from API call
 
   useEffect(() => {
-    getArticles()
-      .then((articlesReceived) => {
-        if (topicname) {
-          const filteredArticles = articlesReceived.filter((article) => {
-            return article.topic === topicname;
-          });
-          setArticles(filteredArticles);
-        } else {
-          setArticles(articlesReceived);
-        }
-
+    getArticles(topicname)
+      .then((res) => {
+        setArticles(res);
         setLoading(false);
       })
       .catch((err) => {
@@ -47,8 +31,6 @@ const Articles = () => {
       <h2 className="articles-header">
         {topicname ? `Articles on ${topicname}` : "All Articles"}
       </h2>
-      <SortBy className="articles-sortby" />
-      <OrderBy className="articles-orderby" />
       <ul className="articles-list">
         {articles.map((article) => {
           return (
