@@ -48,7 +48,7 @@ const SingleArticle = ({ currUser }) => {
         currUser={currUser}
         setCommentAdded={setCommentAdded}
       />
-      <Comments comments={comments} />
+      <Comments comments={comments} currUser={currUser} />
     </main>
   );
 };
