@@ -1,0 +1,18 @@
+.topics {
+    margin: 5%;
+}
+
+.topics h2 {
+    margin: 10px;
+    padding: 10px
+}
+
+.topics ul {
+    list-style: none;
+
+}
+
+.topics ul li h3 {
+    margin: 10px;
+    padding: 10px
+}

@@ -4,8 +4,13 @@ const ncNewsApi = axios.create({
   baseURL: "https://nc-news-fqa4.onrender.com/api",
 });
 
-export const getArticles = () => {
-  return ncNewsApi.get("/articles").then(({ data: { articles } }) => {
+export const getArticles = (topicname) => {
+  const queries = {
+    params: {
+      topic: topicname,
+    },
+  };
+  return ncNewsApi.get("/articles", queries).then(({ data: { articles } }) => {
     return articles;
   });
 };
@@ -41,9 +46,14 @@ export const patchArticleVote = (article_id, voteQty) => {
 };
 
 export const postCommentToArticle = (article_id, user, comment) => {
-  return ncNewsApi
-    .post(`/articles/${article_id}/comments`, {
-      username: user,
-      body: comment,
-    })
+  return ncNewsApi.post(`/articles/${article_id}/comments`, {
+    username: user,
+    body: comment,
+  });
+};
+
+export const getTopics = () => {
+  return ncNewsApi.get("/topics").then(({ data: { topics } }) => {
+    return topics;
+  });
 };

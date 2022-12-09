@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import "../CSS/Articles.css";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [articleIdClicked, setArticleIdClicked] = useState();
+  const { topicname } = useParams();
 
   useEffect(() => {
-    getArticles().then((res) => {
-      setArticles(res);
-      setLoading(false);
-    });
-  }, []);
+    getArticles(topicname)
+      .then((res) => {
+        setArticles(res);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [topicname]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -22,7 +26,9 @@ const Articles = () => {
 
   return (
     <main className="articles">
-      <h2 className="articles-header">All Articles</h2>
+      <h2 className="articles-header">
+        {topicname ? `Articles on ${topicname}` : "All Articles"}
+      </h2>
       <ul className="articles-list">
         {articles.map((article) => {
           return (
