@@ -3,14 +3,24 @@ import { getArticles } from "../api";
 import "../CSS/Articles.css";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { formatDate } from "../utils/formatDate";
+import SortBy from "./SortBy";
+import OrderBy from "./OrderBy";
 
-const Articles = () => {
+const Articles = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState();
+  const [orderBy, setOrderBy] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { topicname } = useParams();
 
   useEffect(() => {
-    getArticles(topicname)
+    if (!sortBy && !orderBy) {
+      setSearchParams({ sort_by: "created_at", order_by: "DESC" });
+    } else {
+      setSearchParams({ sort_by: sortBy, order_by: orderBy });
+    }
+    getArticles(topicname, sortBy, orderBy)
       .then((res) => {
         setArticles(res);
         setLoading(false);
@@ -18,7 +28,7 @@ const Articles = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [topicname]);
+  }, [topicname, sortBy, orderBy]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -29,6 +39,8 @@ const Articles = () => {
       <h2 className="articles-header">
         {topicname ? `Articles on ${topicname}` : "All Articles"}
       </h2>
+      <SortBy className="articles-sort_by" setSortBy={setSortBy} />
+      <OrderBy className="articles-order_by" setOrderBy={setOrderBy} />
       <ul className="articles-list">
         {articles.map((article) => {
           return (
