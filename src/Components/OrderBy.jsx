@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import "../CSS/OrderBy.css";
 
-const OrderBy = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    searchParams.append("order_by", "DESC");
-  }, [searchParams]);
-
-  const handleOrderByChange = (event) => {};
+const OrderBy = ({ setOrderBy }) => {
+  const handleOrderByChange = (event) => {
+    if (event.target.value === "Ascending") {
+      setOrderBy("ASC");
+    } else {
+      setOrderBy("DESC");
+    }
+  };
 
   return (
     <div className="order_by">

@@ -2,9 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import "../CSS/SortBy.css";
 
-const SortBy = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
+const SortBy = ({ setSortBy }) => {
   const sortByFormat = {
     Author: "author",
     Title: "title",
@@ -14,14 +12,10 @@ const SortBy = () => {
     "Comment Count": "comment_count",
   };
 
-  useEffect(() => {
-    setSearchParams({ sort_by: "created_at" });
-  }, []);
-
   const handleSortByChange = (event) => {
     for (const key in sortByFormat) {
       if (key === event.target.value) {
-        setSearchParams({ sort_by: sortByFormat[key] });
+        setSortBy(sortByFormat[key]);
       }
     }
   };

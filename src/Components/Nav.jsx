@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../CSS/Nav.css";
 
 const Nav = () => {
@@ -7,7 +7,13 @@ const Nav = () => {
       <Link className="nav--link" to="/">
         Home
       </Link>
-      <Link className="nav--link" to="/articles">
+      <Link
+        className="nav--link"
+        to="/articles"
+        onClick={() => {
+          window.location.replace("/articles");
+        }}
+      >
         Articles
       </Link>
       <Link className="nav--link" to="/topics">
