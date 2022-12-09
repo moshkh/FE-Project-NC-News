@@ -22,13 +22,12 @@ function App() {
         <UserBar />
         <Routes>
           <Route path="/" element={<Intro />} />
-          <Route path="/articles/allarticles" element={<Articles />} />
+          <Route path="/articles" element={<Articles />} />
           <Route path="/topics" element={<Topics />} />
           <Route path="/:user" element={<CurrentUser />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/topic/:topicname" element={<Articles />} />
+          <Route path="/topics/:topicname" element={<Articles />} />
           <Route
-            path={`/articles/viewarticle/:article_id`}
+            path={`/articles/:article_id`}
             element={<SingleArticle currUser={currUser} />}
           />
         </Routes>

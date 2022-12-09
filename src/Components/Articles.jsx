@@ -10,17 +10,9 @@ const Articles = () => {
   const { topicname } = useParams();
 
   useEffect(() => {
-    getArticles()
-      .then((articlesReceived) => {
-        if (topicname) {
-          const filteredArticles = articlesReceived.filter((article) => {
-            return article.topic === topicname;
-          });
-          setArticles(filteredArticles);
-        } else {
-          setArticles(articlesReceived);
-        }
-
+    getArticles(topicname)
+      .then((res) => {
+        setArticles(res);
         setLoading(false);
       })
       .catch((err) => {
@@ -41,7 +33,7 @@ const Articles = () => {
         {articles.map((article) => {
           return (
             <li className="articles-list-item" key={article.article_id}>
-              <Link to={`/articles/viewarticle/${article.article_id}`}>
+              <Link to={`/articles/${article.article_id}`}>
                 <h3>{article.title}</h3>
               </Link>
               <p>Topic: {article.topic}</p>

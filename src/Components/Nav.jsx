@@ -7,7 +7,7 @@ const Nav = () => {
       <Link className="nav--link" to="/">
         Home
       </Link>
-      <Link className="nav--link" to="/articles/allarticles">
+      <Link className="nav--link" to="/articles">
         Articles
       </Link>
       <Link className="nav--link" to="/topics">
