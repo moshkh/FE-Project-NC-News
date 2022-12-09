@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import "../CSS/SortBy.css";
 
-const SortBy = ({ setSortBy }) => {
+const SortBy = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortByFormat = {
@@ -15,14 +15,13 @@ const SortBy = ({ setSortBy }) => {
   };
 
   useEffect(() => {
-    setSearchParams({ sort_by: "date" });
+    setSearchParams({ sort_by: "created_at" });
   }, []);
 
   const handleSortByChange = (event) => {
-    setSearchParams({ sort_by: event.target.value });
     for (const key in sortByFormat) {
       if (key === event.target.value) {
-        setSortBy(sortByFormat[key]);
+        setSearchParams({ sort_by: sortByFormat[key] });
       }
     }
   };
