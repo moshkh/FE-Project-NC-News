@@ -11,6 +11,7 @@ const Articles = () => {
   const [loading, setLoading] = useState(true);
   const { topicname } = useParams();
 
+  //declare useSearchParams here and pass as a prop to SortBy and OrderBy Components?
   useEffect(() => {
     getArticles(topicname)
       .then((res) => {
@@ -31,6 +32,8 @@ const Articles = () => {
       <h2 className="articles-header">
         {topicname ? `Articles on ${topicname}` : "All Articles"}
       </h2>
+      <SortBy className="articles-sort_by" />
+      <OrderBy className="articles-order_by" />
       <ul className="articles-list">
         {articles.map((article) => {
           return (
