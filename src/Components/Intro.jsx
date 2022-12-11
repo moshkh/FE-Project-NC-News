@@ -39,7 +39,7 @@ const Intro = () => {
         </a>{" "}
         to find out more about me or to contact me
       </p>
-      <h3>Msot Recent Articles</h3>
+      <h3>Most Recent Articles</h3>
       <ul className="homepage--recent-articles-list">
         {recentArticles.map((article) => {
           return (
