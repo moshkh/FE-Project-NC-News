@@ -3,14 +3,26 @@ import "../CSS/Comments.css";
 import { deleteComment } from "../api";
 import { useState } from "react";
 
-const Comments = ({ comments, currUser }) => {
+const Comments = ({ comments, currUser, setCommentDeleted }) => {
   const [err, setErr] = useState({ msg: "" });
+  const [disable, setDisable] = useState(false);
+  const [buttonText, setButtonText] = useState("Delete comment");
+  const [commentId, setCommentId] = useState();
 
   const handleDeleteClick = (event) => {
     const commentId = event.target.id;
-    deleteComment(commentId).catch((err) => {
-      setErr({ msg: "Oops something went wrong - try deleting again!" });
-    });
+    setDisable(true);
+    setButtonText("Deleting...");
+    deleteComment(commentId)
+      .then(() => {
+        setCommentDeleted(true);
+        setDisable(false);
+        setButtonText("Delete Comment");
+      })
+      .catch((err) => {
+        setErr({ msg: "Oops something went wrong - try deleting again!" });
+        setDisable(false);
+      });
   };
 
   return (
@@ -27,11 +39,12 @@ const Comments = ({ comments, currUser }) => {
                 className="comments--single-comment--delete-button"
                 id={comment.comment_id}
                 onClick={handleDeleteClick}
+                disabled={disable}
               >
-                Delete comment
+                {buttonText}
               </button>
             ) : null}
-            <p>{err.msg}</p>
+            <p>{err.msg ? err.msg : null}</p>
           </li>
         );
       })}
