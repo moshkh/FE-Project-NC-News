@@ -1,4 +1,27 @@
-.userbar {
-  margin: 10px;
-  padding: 10px;
+.userbar-grid {
+  display: block;
+  grid-template-columns: 50% 50%;
+  margin: auto;
+  max-width: 300px;
 }
+
+.userbar {
+  grid-column: 1 / 2;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 #043927;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.userbar:hover {
+  box-shadow: 0 8px 16px 0 #043927;
+}
+
+.userbar--link {
+  padding: 2px 16px;
+  text-decoration: none;
+  color: #043927;
+}
+
+/*change border radius colour if logged out */

@@ -1,6 +1,6 @@
 .order_by {
   margin: 10px;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -17,4 +17,12 @@
   width: 175px;
   display: block;
   margin: 10px auto;
+}
+
+@media screen and (max-width: 500px) {
+  .order_by {
+    margin: 10px;
+    display: inline-grid;
+    grid-template-columns: 1fr;
+  }
 }

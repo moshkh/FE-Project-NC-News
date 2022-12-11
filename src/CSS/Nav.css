@@ -9,13 +9,23 @@
 .nav--link {
   text-decoration: none;
   background-color: #15253f;
-  margin: 30px;
+  margin: 20px;
   padding: 10px;
   color: white;
   font-family: "Raleway", sans-serif;
 }
 
 .nav--link:hover {
-  background: red;
-  padding: 10px;
+  background: white;
+  color: #15253f;
+}
+
+@media screen and (max-width: 500px) {
+  .nav{
+    display: grid;
+  }
+  .nav--link {
+    margin: 10px;
+    padding: 10px;
+  }
 }

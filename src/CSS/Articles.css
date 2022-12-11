@@ -24,7 +24,19 @@
 
 .articles--list {
   list-style: none;
-  grid-row: 4;
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+@media screen and (max-width: 500px) {
+  .articles--sort-by {
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .articles--order-by {
+    grid-row: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

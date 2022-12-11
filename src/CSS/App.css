@@ -23,7 +23,7 @@ h4 {
 h1 {
   background: red;
   color: white;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px #15253f;
   margin: 0px;
   padding: 20px;
 }
@@ -37,3 +37,4 @@ p {
   margin: 10px;
   font-family: 'Nunito Sans', sans-serif;
 }
+

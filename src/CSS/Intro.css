@@ -1,15 +1,24 @@
 .homepage {
-    display: inline-grid;
-    grid-template-columns: 1fr, 1fr;
-    max-width: 700px;
+  display: inline-grid;
+  grid-template-columns: 1fr, 1fr;
+  max-width: 700px;
 }
 
-
 .homepage--announcement {
-    border: solid rgb(229, 98, 98);
-    padding: 10px;
+  padding: 10px;
+  border: solid red;
+  border-radius: 20px 0px 20px 0px;
+  color: black;
+}
+
+.homepage--recent-articles-header {
+  background-color: #15253f;
+  padding: 10px;
+  border: solid #15253f;
+  border-radius: 0px 20px 0px 20px;
+  color: white;
 }
 
 .homepage--recent-articles-list {
-    list-style: none;
+  list-style: none;
 }
