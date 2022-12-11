@@ -1,4 +1,15 @@
+.homepage {
+    display: inline-grid;
+    grid-template-columns: 1fr, 1fr;
+    max-width: 700px;
+}
+
+
 .homepage--announcement {
-    border: solid red;
+    border: solid rgb(229, 98, 98);
     padding: 10px;
+}
+
+.homepage--recent-articles-list {
+    list-style: none;
 }

@@ -39,9 +39,13 @@ const Articles = (props) => {
       <h2 className="articles-header">
         {topicname ? `Articles on ${topicname}` : "All Articles"}
       </h2>
-      <SortBy className="articles-sort_by" setSortBy={setSortBy} />
-      <OrderBy className="articles-order_by" setOrderBy={setOrderBy} />
-      <ul className="articles-list">
+      <div className="articles--sort-by">
+        <SortBy setSortBy={setSortBy} />
+      </div>
+      <div className="articles--order-by">
+        <OrderBy setOrderBy={setOrderBy} />
+      </div>
+      <ul className="articles--list">
         {articles.map((article) => {
           return (
             <li className="articles-list-item" key={article.article_id}>

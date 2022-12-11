@@ -33,7 +33,7 @@ const Intro = () => {
         <a href="https://github.com/moshkh/BE-Project-NC-News">here</a>
       </p>
       <p>
-        By moshkh - checkout my{" "}
+        Checkout my{" "}
         <a href="https://www.linkedin.com/in/musab-hussain-229918250/">
           LinkedIn
         </a>{" "}
