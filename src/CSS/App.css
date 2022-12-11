@@ -1,7 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu:wght@500&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Quicksand&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   /* border: 1px solid red; */
   text-align: center;
+  background: #F9F9FB;
 }
+
+h1,
+h2,
+h4 {
+  font-family: "Ubuntu", sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  background: red;
+  color: white;
+  -webkit-text-stroke: 1px #15253f;
+  margin: 0px;
+  padding: 20px;
+}
+
+h3 {
+  font-family: "Quicksand", sans-serif;
+  margin: 20px;
+}
+
+p {
+  margin: 10px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+

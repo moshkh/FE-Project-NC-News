@@ -7,11 +7,11 @@ const UserBar = () => {
   const { currUser } = useContext(UserContext);
 
   return (
+    <div className="userbar-grid">
     <nav className="userbar">
-      <Link to={`/${currUser}`}>
-        Logged in as {currUser}
-      </Link>
+        <Link className="userbar--link" to={`/${currUser}`}>Logged in as {currUser}</Link>
     </nav>
+    </div>
   );
 };
 

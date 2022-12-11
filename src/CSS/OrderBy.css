@@ -1,20 +1,28 @@
 .order_by {
+  margin: 10px;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.order_by label {
+  text-align: center;
+  grid-row: 1;
+  grid-column-start: 1;
+}
+
+.order_by select {
+  margin: 10px;
+  grid-row: 2;
+  grid-column-start: 1;
+  width: 175px;
+  display: block;
+  margin: 10px auto;
+}
+
+@media screen and (max-width: 500px) {
+  .order_by {
     margin: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: inline-grid;
+    grid-template-columns: 1fr;
   }
-  
-  .order_by label {
-    text-align: center;
-    grid-row: 1;
-    grid-column-start: 1;
-  }
-  
-  .order_by select {
-    margin: 10px;
-    grid-row: 2;
-    grid-column-start: 1;
-    width: 175px;
-    display: block;
-    margin: 10px auto;
-  }
+}

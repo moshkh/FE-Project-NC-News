@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import "../CSS/SortBy.css";
 
 const SortBy = ({ setSortBy }) => {
