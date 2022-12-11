@@ -2,7 +2,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import { getArticles } from "../api";
 import { formatDate } from "../utils/formatDate";
-import Articles from "./Articles";
+import "../CSS/Intro.css"
 
 const Intro = () => {
   const [recentArticles, setRecentArticles] = useState([]);
@@ -18,7 +18,7 @@ const Intro = () => {
   return (
     <main className="homepage">
       <h2>Welcome to the NC News Homepage</h2>
-      <h3>Breaking News!</h3>
+      <h3 className="homepage--announcement">Breaking News!</h3>
       <p>
         This is a mock news / blog site which is a portfolio piece to showecase
         my front-end skills, I have built this site with react.js. The repo for
