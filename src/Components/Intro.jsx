@@ -1,8 +1,22 @@
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
+import { getArticles } from "../api";
+import { formatDate } from "../utils/formatDate";
+import Articles from "./Articles";
 
 const Intro = () => {
+  const [recentArticles, setRecentArticles] = useState([]);
+
+  useEffect(() => {
+    getArticles().then((res) => {
+      setRecentArticles([res[0], res[1]]);
+    });
+  }, []);
+
+  console.log(recentArticles);
+
   return (
-    <main>
+    <main className="homepage">
       <h2>Welcome to the NC News Homepage</h2>
       <h3>Breaking News!</h3>
       <p>
@@ -25,6 +39,23 @@ const Intro = () => {
         </a>{" "}
         to find out more about me or to contact me
       </p>
+      <h3>Msot Recent Articles</h3>
+      <ul className="homepage--recent-articles-list">
+        {recentArticles.map((article) => {
+          return (
+            <li key={article.article_id}>
+              <Link to={`/articles/${article.article_id}`}>
+                <h3>{article.title}</h3>
+              </Link>
+              <p>Topic: {article.topic}</p>
+              <p>Author: {article.author}</p>
+              <p>Date Posted: {formatDate(article.created_at)}</p>
+              <p>Comments: {article.comment_count}</p>
+              <p>Votes: {article.votes}</p>
+            </li>
+          );
+        })}
+      </ul>
     </main>
   );
 };
