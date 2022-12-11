@@ -30,6 +30,14 @@ function App() {
             path={`/articles/:article_id`}
             element={<SingleArticle currUser={currUser} />}
           />
+          <Route
+            path={`/recentarticle/first/:article_id`}
+            element={<SingleArticle currUser={currUser} />}
+          />
+          <Route
+            path={`/recentarticle/second/:article_id`}
+            element={<SingleArticle currUser={currUser} />}
+          />
         </Routes>
       </div>
     </UserContext.Provider>
