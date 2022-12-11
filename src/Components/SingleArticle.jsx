@@ -13,6 +13,7 @@ const SingleArticle = ({ currUser }) => {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [commentAdded, setCommentAdded] = useState(false);
+  const [commentDeleted, setCommentDeleted] = useState(false);
 
   useEffect(() => {
     const articleFetch = getArticleById(article_id).then((res) => {
@@ -22,12 +23,13 @@ const SingleArticle = ({ currUser }) => {
     const commentsFetch = getArticleComments(article_id).then((res) => {
       setComments(res);
       setCommentAdded(false);
+      setCommentDeleted(false);
     });
 
     Promise.all([articleFetch, commentsFetch]).then(() => {
       setLoading(false);
     });
-  }, [article_id, commentAdded]);
+  }, [article_id, commentAdded, commentDeleted]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -48,7 +50,11 @@ const SingleArticle = ({ currUser }) => {
         currUser={currUser}
         setCommentAdded={setCommentAdded}
       />
-      <Comments comments={comments} />
+      <Comments
+        comments={comments}
+        currUser={currUser}
+        setCommentDeleted={setCommentDeleted}
+      />
     </main>
   );
 };
