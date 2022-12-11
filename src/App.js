@@ -2,7 +2,7 @@ import "./CSS/App.css";
 import Header from "./Components/Header";
 import Intro from "./Components/Intro";
 import Nav from "./Components/Nav";
-import { Routes, Route, useSearchParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./context/user.context";
 import { useState } from "react";
 import Articles from "./Components/Articles";
