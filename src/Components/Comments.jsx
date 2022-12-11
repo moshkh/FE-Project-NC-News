@@ -6,21 +6,22 @@ import { useState } from "react";
 const Comments = ({ comments, currUser, setCommentDeleted }) => {
   const [err, setErr] = useState({ msg: "" });
   const [disable, setDisable] = useState(false);
-  const [buttonText, setButtonText] = useState("Delete comment");
-  const [commentId, setCommentId] = useState();
+  const [buttonText, setButtonText] = useState("Delete Comment");
+  const [currCommentId, setCurrCommentId] = useState();
 
   const handleDeleteClick = (event) => {
+    console.log(event);
     const commentId = event.target.id;
-    setDisable(true);
+    setCurrCommentId(event.target.id);
     setButtonText("Deleting...");
+    setDisable(true);
     deleteComment(commentId)
       .then(() => {
         setCommentDeleted(true);
-        setDisable(false);
-        setButtonText("Delete Comment");
       })
       .catch((err) => {
         setErr({ msg: "Oops something went wrong - try deleting again!" });
+        setButtonText("Delete Comment");
         setDisable(false);
       });
   };
@@ -39,12 +40,14 @@ const Comments = ({ comments, currUser, setCommentDeleted }) => {
                 className="comments--single-comment--delete-button"
                 id={comment.comment_id}
                 onClick={handleDeleteClick}
-                disabled={disable}
+                disabled={currCommentId == comment.comment_id ? disable : false}
               >
-                {buttonText}
+                {currCommentId == comment.comment_id
+                  ? buttonText
+                  : "Delete Comment"}
               </button>
             ) : null}
-            <p>{err.msg ? err.msg : null}</p>
+            <p>{currCommentId == comment.comment_id ? err.msg : null}</p>
           </li>
         );
       })}
