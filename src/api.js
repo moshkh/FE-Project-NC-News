@@ -59,3 +59,7 @@ export const getTopics = () => {
     return topics;
   });
 };
+
+export const deleteComment = (comment_id) => {
+  return ncNewsApi.delete(`/comments/${comment_id}`);
+};
