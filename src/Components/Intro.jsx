@@ -13,8 +13,6 @@ const Intro = () => {
     });
   }, []);
 
-  console.log(recentArticles);
-
   return (
     <main className="homepage">
       <h2>Welcome to the NC News Homepage</h2>
