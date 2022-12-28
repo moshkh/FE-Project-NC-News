@@ -1,8 +1,6 @@
 # Project Summary:
 
-This project is a front-end "mock-up" blog / news website for Northcoders. The website is served content through a back-end project I have created which can be viewed [here](https://github.com/moshkh/BE-Project-NC-News). 
-
-The website was built with react.js
+This project is a front-end "mock-up" blog / news website for Northcoders. The website is served content through a back-end project I have created which can be viewed [here](https://github.com/moshkh/BE-Project-NC-News) - The website was built using react.js.
 
 **Dependencies:**
 
