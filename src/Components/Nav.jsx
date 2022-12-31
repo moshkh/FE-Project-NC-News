@@ -4,66 +4,77 @@ import useWindowDimensions from "../custom_hooks/useWindowDimensions";
 import { Squash as Hamburger } from "hamburger-react";
 import { useState } from "react";
 
-const Nav = () => {
+const Nav = ({ className }) => {
   const { width } = useWindowDimensions();
   const [isOpen, setOpen] = useState(false);
 
-  console.log(isOpen);
-  // console.log("height: ", height, "width: ", width);
-  //make className dynamic so if width is above 500px
-  //then keep as is => under 500px change className
-  //so I can implement a hamburger menu
+  const hamburgerNavClick = () => {
+    setOpen(false);
+  };
 
   return width >= 501 ? (
-    <nav className="nav">
-      <Link className="nav--link" to="/">
-        Home
-      </Link>
-      <Link
-        className="nav--link"
-        to="/articles"
-        onClick={() => {
-          window.location.replace("/articles");
-        }}
-      >
-        Articles
-      </Link>
-      <Link className="nav--link" to="/topics">
-        Topics
-      </Link>
-    </nav>
+    <div className={className}>
+      <nav className="nav">
+        <Link className="nav--link" to="/">
+          Home
+        </Link>
+        <Link
+          className="nav--link"
+          to="/articles"
+          onClick={() => {
+            window.location.replace("/articles");
+          }}
+        >
+          Articles
+        </Link>
+        <Link className="nav--link" to="/topics">
+          Topics
+        </Link>
+      </nav>
+    </div>
   ) : (
-    <nav className="nav">
-      <div className="hamburger-icon">
-        <Hamburger
-          duration={0.8}
-          size="30"
-          rounded={true}
-          toggled={isOpen}
-          toggle={setOpen}
-          hideOutline={true}
-        />
-      </div>
-      {isOpen ? (
-        <div className="hamburger-links">
-          <Link className="nav--link hamburger-link-1" to="/">
-            Home
-          </Link>
-          <Link
-            className="nav--link hamburger-link-2"
-            to="/articles"
-            onClick={() => {
-              window.location.replace("/articles");
-            }}
-          >
-            Articles
-          </Link>
-          <Link className="nav--link hamburger-link-3" to="/topics">
-            Topics
-          </Link>
+    <div className={className}>
+      <nav className="nav">
+        <div className="hamburger-icon">
+          <Hamburger
+            duration={0.8}
+            size="30"
+            rounded={true}
+            toggled={isOpen}
+            toggle={setOpen}
+            hideOutline={true}
+          />
         </div>
-      ) : null}
-    </nav>
+        {isOpen ? (
+          <div className="hamburger-links">
+            <Link
+              className="nav--link hamburger-link-1"
+              onClick={hamburgerNavClick}
+              to="/"
+            >
+              Home
+            </Link>
+            <Link
+              className="nav--link hamburger-link-2"
+              to="/articles"
+              onClick={() => {
+                window.location.replace("/articles");
+                hamburgerNavClick();
+              }}
+            >
+              Articles
+            </Link>
+            <Link
+              className="nav--link hamburger-link-3"
+              onClick={hamburgerNavClick}
+              to="/topics"
+            >
+              Topics
+            </Link>
+          </div>
+        ) : null}
+      </nav>
+    </div>
   );
 };
 

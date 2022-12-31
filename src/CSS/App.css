@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Quicksand&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Quicksand&display=swap");
 
 * {
   margin: 0;
@@ -10,7 +10,7 @@
   box-sizing: border-box;
   /* border: 1px solid red; */
   text-align: center;
-  background: #F9F9FB;
+  background: #f9f9fb;
 }
 
 h1,
@@ -35,6 +35,19 @@ h3 {
 
 p {
   margin: 10px;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
+.Nav {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+}
+
+.Nav--navbar {
+  grid-row-start: 1;
+}
+
+.Nav--userbar {
+  grid-row-start: 2;
+}

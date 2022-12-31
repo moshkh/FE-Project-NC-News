@@ -16,11 +16,13 @@ function App() {
 
   return (
     <UserContext.Provider value={{ currUser, setCurrUser }}>
-      <div>
-        <Header />
-        <Nav />
-        <UserBar />
-        <Routes>
+      <div className="App">
+        <Header className="Header"/>
+        <section className="Nav">
+        <Nav className="Nav--navbar"/>
+        <UserBar className="Nav--userbar"/>
+        </section>
+        <Routes className="Routes">
           <Route path="/" element={<Intro />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/topics" element={<Topics />} />
