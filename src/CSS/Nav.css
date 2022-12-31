@@ -21,11 +21,48 @@
 }
 
 @media screen and (max-width: 500px) {
-  .nav{
+  .nav {
+    background: #f9f9fb;
     display: grid;
-  }
-  .nav--link {
-    margin: 10px;
+    grid-template-rows: 2;
     padding: 10px;
+    justify-content: center;
+  }
+
+  .hamburger-icon {
+    background: #f9f9fb;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    background-clip: content-box;
+    color: #15253f;
+  }
+
+  .hamburger-links {
+    background-color: #15253f;;
+    grid-row-start: 2;
+    display: grid;
+    grid-template-rows: 3;
+    justify-content: center;
+    position: absolute;
+  }
+
+  .hamburger-link-1 {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .hamburger-link-2 {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .hamburger-link-3 {
+    grid-row-start: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
   }
 }
